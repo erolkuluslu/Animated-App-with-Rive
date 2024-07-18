@@ -32,11 +32,11 @@ class AnimatedBtn extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(CupertinoIcons.arrow_right),
+                  const Icon(CupertinoIcons.arrow_right,color: Colors.white),
                   const SizedBox(width: 8),
                   Text(
-                    "Start the course",
-                    style: Theme.of(context).textTheme.button,
+                    "Start",
+                    style: Theme.of(context).textTheme.labelLarge,
                   )
                 ],
               ),

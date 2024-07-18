@@ -14,71 +14,98 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool isShowLoading = false;
-  bool isShowConfetti = false;
-  late SMITrigger error;
-  late SMITrigger success;
-  late SMITrigger reset;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // Key for the form
+  bool isShowLoading = false; // Flag to show or hide loading animation
+  bool isShowConfetti = false; // Flag to show or hide confetti animation
+  late SMITrigger error; // Trigger for error state in Rive animation
+  late SMITrigger success; // Trigger for success state in Rive animation
+  late SMITrigger reset; // Trigger for reset state in Rive animation
+  late SMITrigger confetti; // Trigger for confetti animation
 
-  late SMITrigger confetti;
-
-  void _onCheckRiveInit(Artboard artboard) {
+  void _onCheckRiveInit(Artboard artboard) { // Called when Rive animation is initialized
+    // Get the state machine controller from the artboard
     StateMachineController? controller =
-        StateMachineController.fromArtboard(artboard, 'State Machine 1');
+    StateMachineController.fromArtboard(artboard, 'State Machine 1');
 
+    // Add the controller to the artboard
     artboard.addController(controller!);
+
+    // Find the trigger inputs for different states
     error = controller.findInput<bool>('Error') as SMITrigger;
     success = controller.findInput<bool>('Check') as SMITrigger;
     reset = controller.findInput<bool>('Reset') as SMITrigger;
   }
 
-  void _onConfettiRiveInit(Artboard artboard) {
-    StateMachineController? controller =
-        StateMachineController.fromArtboard(artboard, "State Machine 1");
+  void _onConfettiRiveInit(Artboard artboard) { // Called when Rive animation is initialized
+    // Get the state machine controller from the artboard
+    StateMachineController? controller = StateMachineController.fromArtboard(artboard, "State Machine 1");
+
+    // Add the controller to the artboard
     artboard.addController(controller!);
 
+    // Find the trigger input for confetti animation
     confetti = controller.findInput<bool>("Trigger explosion") as SMITrigger;
   }
 
+  // Handle the sign in button click
   void singIn(BuildContext context) {
+    // Trigger the confetti animation
     // confetti.fire();
+
+    // Update loading and confetti states
     setState(() {
       isShowConfetti = true;
       isShowLoading = true;
     });
+
+    // Delay for simulating API call
     Future.delayed(
       const Duration(seconds: 1),
-      () {
+          () {
+        // Validate the form
         if (_formKey.currentState!.validate()) {
+          // Show success state in Rive animation
           success.fire();
+
+          // Delay for simulating API call response
           Future.delayed(
             const Duration(seconds: 2),
-            () {
+                () {
+              // Hide loading animation
               setState(() {
                 isShowLoading = false;
               });
+
+              // Trigger confetti animation
               confetti.fire();
-              // Navigate & hide confetti
+
+              // Delay for showing confetti
               Future.delayed(const Duration(seconds: 1), () {
+                // Navigate to another page and hide confetti
                 // Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const EntryPoint(),
+                    builder: (context) =>  EntryPoint(),
                   ),
                 );
               });
             },
           );
         } else {
+          // Show error state in Rive animation
           error.fire();
+
+          // Delay for showing error message
           Future.delayed(
             const Duration(seconds: 2),
-            () {
+                () {
+              // Hide loading animation
               setState(() {
                 isShowLoading = false;
               });
+
+              // Reset the Rive animation
               reset.fire();
             },
           );
@@ -91,6 +118,7 @@ class _SignInFormState extends State<SignInForm> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // Form for email and password input
         Form(
           key: _formKey,
           child: Column(
@@ -105,6 +133,7 @@ class _SignInFormState extends State<SignInForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "";

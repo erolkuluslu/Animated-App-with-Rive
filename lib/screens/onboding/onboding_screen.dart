@@ -30,6 +30,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Positioned(
@@ -40,21 +41,30 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
               "assets/Backgrounds/Spline.png",
             ),
           ),
+
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
               child: const SizedBox(),
             ),
           ),
+
+
+
           const RiveAnimation.asset(
             "assets/RiveAssets/shapes.riv",
           ),
+
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
               child: const SizedBox(),
             ),
           ),
+
+
+
+
           AnimatedPositioned(
             top: isShowSignInDialog ? -50 : 0,
             height: MediaQuery.of(context).size.height,
@@ -62,19 +72,19 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
             duration: const Duration(milliseconds: 260),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+                padding: const EdgeInsets.symmetric(horizontal: 32,vertical: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Spacer(),
-                    SizedBox(
+                    const SizedBox(
                       width: 260,
                       child: Column(
-                        children: const [
+                        children: [
                           Text(
-                            "Learn design & code",
+                            "Real Time Attendance",
                             style: TextStyle(
-                              fontSize: 60,
+                              fontSize: 40,
                               fontWeight: FontWeight.w700,
                               fontFamily: "Poppins",
                               height: 1.2,
@@ -82,7 +92,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                           ),
                           SizedBox(height: 16),
                           Text(
-                            "Don’t skip design. Learn design and code, by building real apps with Flutter and Swift. Complete courses about the best tools.",
+                            "Fully automated attendance app",
                           ),
                         ],
                       ),
@@ -111,17 +121,12 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                         );
                       },
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24),
-                      child: Text(
-                          "Purchase includes access to 30+ courses, 240+ premium tutorials, 120+ hours of videos, source files and certificates."),
-                    )
                   ],
                 ),
               ),
             ),
           ),
-        ],
+                  ],
       ),
     );
   }

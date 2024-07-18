@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "909389396431",
+    "firebase_url": "https://attendance-app-b14bf-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "attendance-app-b14bf",
+    "storage_bucket": "attendance-app-b14bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909389396431:android:4f990d24b11c93dbf3baba",
+        "android_client_info": {
+          "package_name": "com.example.rive_animation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX1_Hcmwn-FsJseugjgFthZUCdkmQ5E_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
